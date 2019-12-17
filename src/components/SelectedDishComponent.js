@@ -14,9 +14,9 @@ class SelectedDish extends Component{
 			return(
 				<div></div>
 			);
-		else
+		else{
 			return(
-				<div>
+				<div className="col-12 col-md-5 m-1">
 					<Card>
 						<CardImg top src={dish.image} alt={dish.name} />
 	                    <CardBody>
@@ -26,6 +26,7 @@ class SelectedDish extends Component{
 					</Card>
 				</div>
 			);
+		}
 	}
 }
 
