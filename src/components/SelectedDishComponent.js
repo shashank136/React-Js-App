@@ -5,13 +5,11 @@ class SelectedDish extends Component{
 
 	constructor(props){
 		super(props);
-		this.state = {
-			selectedDish : this.props.dish
-		}
+		this.state = {}
 	}
 
 	render(){
-		const dish = selectedDish;
+		const dish = this.props.dish;
 		if(dish==null)
 			return(
 				<div></div>
