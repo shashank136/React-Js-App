@@ -7,17 +7,17 @@ class SelectedDish extends Component{
         if (comments == null) {
             return (<div></div>)
         }
-        const cmnts = comments.map(comment => {
+        const comment = comments.map(cmt => {
             return (
-                <li key={comment.id}>
-                    <p>{comment.comment}</p>
-                    <p>-- {comment.author},
+                <li key={cmt.id}>
+                    <p>{cmt.comment}</p>
+                    <p>-- {cmt.author},
                     &nbsp;
                     {new Intl.DateTimeFormat('en-US', {
                             year: 'numeric',
                             month: 'long',
                             day: '2-digit'
-                        }).format(new Date(comment.date))}
+                        }).format(new Date(cmt.date))}
                     </p>
                 </li>
             )
@@ -26,7 +26,7 @@ class SelectedDish extends Component{
             <div className='col-12 col-md-5 m-1'>
                 <h4> Comments </h4>
                 <ul className='list-unstyled'>
-                    {cmnts}
+                    {comment}
                 </ul>
 
             </div>
