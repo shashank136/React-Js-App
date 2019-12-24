@@ -46,7 +46,7 @@ function RenderDish({ dish }) {
 	}
 }
 
-const DishDetailComponent = props => {
+const DishDetail = props => {
 	const dish = props.dish;
 	if (dish == null) {
 		return <div></div>;
@@ -59,4 +59,4 @@ const DishDetailComponent = props => {
 	);
 };
 
-export default DishDetailComponent;
+export default DishDetail;
