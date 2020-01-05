@@ -7,13 +7,14 @@ const required = (val) => val && val.length;
 const maxLength = (len) => (val) => !(val) || (val.length <= len);
 const minLength = (len) => (val) => val && (val.length >= len);
 
-function RenderComments({ comments }) {
+function RenderComments({ comments, addComment, dishId }) {
 
 	const [modal, setModal] = useState(false);
 	const toggle = () => setModal(!modal);
 	const handleSubmit =(values) =>{
 		console.log('Current State is: ' + JSON.stringify(values));
 	    alert('Current State is: ' + JSON.stringify(values));
+	    addComment(dishId, values.rating, values.author, values.comment);
 	    toggle();
 	}
 
@@ -35,6 +36,7 @@ function RenderComments({ comments }) {
 			</li>
 		);
 	});
+	
 	return (
 		<div >
 			<h4> Comments </h4>
@@ -132,7 +134,9 @@ const DishDetail = (props) => {
                 <RenderDish dish={props.dish} />
             </div>
             <div className="col-12 col-md-5 m-1">
-                <RenderComments comments={props.comments} />
+                <RenderComments comments={props.comments} 
+                addComment={props.addComment}
+        		dishId={props.dish.id} />
             </div>
         </div>
         
