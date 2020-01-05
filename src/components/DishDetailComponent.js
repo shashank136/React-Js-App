@@ -1,8 +1,20 @@
-import React from "react";
-import { Card, CardImg, CardBody, CardTitle, CardText, Breadcrumb, BreadcrumbItem } from "reactstrap";
+import React, { useState } from "react";
+import { Card, CardImg, CardBody, CardTitle, CardText, Breadcrumb, BreadcrumbItem, Button, Modal, ModalBody, ModalHeader, Row, Label } from "reactstrap";
+import { Control, LocalForm, Errors } from 'react-redux-form';
 import { Link } from 'react-router-dom';
 
+
+
 function RenderComments({ comments }) {
+
+	const [modal, setModal] = useState(false);
+	const toggle = () => setModal(!modal);
+	const handleSubmit =(values) =>{
+		console.log('Current State is: ' + JSON.stringify(values));
+	    alert('Current State is: ' + JSON.stringify(values));
+	    toggle();
+	}
+
 	if (comments == null) {
 		return <div></div>;
 	}
@@ -25,6 +37,37 @@ function RenderComments({ comments }) {
 		<div >
 			<h4> Comments </h4>
 			<ul className="list-unstyled">{comment}</ul>
+			<Button outline onClick={toggle}><span className="fa fa-pencil fa-lg"></span> Submit Comment</Button>
+			<Modal isOpen={modal} toggle={toggle}>
+	        	<ModalHeader toggle={toggle}>Submit Comment</ModalHeader>
+	        	<ModalBody>
+	        		<LocalForm onSubmit={(values) => handleSubmit(values)}>
+	        			<Row className="form-group">
+	        				<Label htmlFor="Rating">Rating</Label>
+	        				<Control.select model=".rating" name="rating" className="form-control">
+	        					<option>1</option>
+	        					<option>2</option>
+	        					<option>3</option>
+	        					<option>4</option>
+	        					<option>5</option>
+	        				</Control.select>
+	        			</Row>
+	        			<Row className="form-group">
+	        				<Label htmlFor="yourname">Your Name</Label>
+	        				<Control.text model=".yourname" name="yourname" id="yourname" className="form-control"
+	        				placeholder="Your Name" />
+	        			</Row>
+	        			<Row className="form-group">
+	        				<Label htmlFor="comment">Comment</Label>
+	        				<Control.text model=".comment" name="comment" id="comment" className="form-control"
+	        				placeholder="Comment" row="12"/>
+	        			</Row>
+	        			<Row className="form-group">
+	        				<Button type="submit" value="submit" color="primary">Submit</Button>
+	        			</Row>
+	        		</LocalForm>
+	        	</ModalBody>
+        	</Modal>
 		</div>
 	);
 }
@@ -47,11 +90,16 @@ function RenderDish({ dish }) {
 	}
 }
 
-const DishDetail = props => {
+const DishDetail = (props) => {
 	const dish = props.dish;
+	
+
 	if (dish == null) {
 		return <div></div>;
 	}
+
+	
+
 	return (
         <div className="container">
         <div className="row">
@@ -72,6 +120,7 @@ const DishDetail = props => {
                 <RenderComments comments={props.comments} />
             </div>
         </div>
+        
         </div>
     );
 };
