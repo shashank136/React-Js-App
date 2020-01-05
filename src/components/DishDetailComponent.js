@@ -3,7 +3,9 @@ import { Card, CardImg, CardBody, CardTitle, CardText, Breadcrumb, BreadcrumbIte
 import { Control, LocalForm, Errors } from 'react-redux-form';
 import { Link } from 'react-router-dom';
 
-
+const required = (val) => val && val.length;
+const maxLength = (len) => (val) => !(val) || (val.length <= len);
+const minLength = (len) => (val) => val && (val.length >= len);
 
 function RenderComments({ comments }) {
 
@@ -55,11 +57,24 @@ function RenderComments({ comments }) {
 	        			<Row className="form-group">
 	        				<Label htmlFor="yourname">Your Name</Label>
 	        				<Control.text model=".yourname" name="yourname" id="yourname" className="form-control"
-	        				placeholder="Your Name" />
+	        				placeholder="Your Name" 
+	        				validators={{
+                                required, minLength: minLength(3), maxLength: maxLength(15)
+                            }}/>
+                            <Errors
+                                className="text-danger"
+                                model=".yourname"
+                                show="touched"
+                                messages={{
+                                    required: 'Required',
+                                    minLength: 'Must be greater than 2 characters',
+                                    maxLength: 'Must be 15 characters or less'
+                                }}
+                             />
 	        			</Row>
 	        			<Row className="form-group">
 	        				<Label htmlFor="comment">Comment</Label>
-	        				<Control.text model=".comment" name="comment" id="comment" className="form-control"
+	        				<Control.textarea model=".comment" name="comment" id="comment" className="form-control"
 	        				placeholder="Comment" row="12"/>
 	        			</Row>
 	        			<Row className="form-group">
