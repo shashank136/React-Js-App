@@ -14,7 +14,7 @@ function RenderComments({ comments, addComment, dishId }) {
 	const handleSubmit =(values) =>{
 		console.log('Current State is: ' + JSON.stringify(values));
 	    alert('Current State is: ' + JSON.stringify(values));
-	    addComment(dishId, values.rating, values.author, values.comment);
+	    addComment(dishId, values.rating, values.yourname, values.comment);
 	    toggle();
 	}
 
